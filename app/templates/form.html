@@ -24,7 +24,7 @@
   </div>
 
   <div class="col-8 m-auto pt-4 pb-2 text-center">  
-    <form name="fomr" id="form" action="{% if db %}/update/{% else %}/create/{% endif %}" method="post">
+    <form name="form" id="form" action="{% if db %}/update/{{db.id}}{% else %}/create/{% endif %}" method="post">
       {% csrf_token %}
       <!-- {{form.as_p}} -->
       <div class="form-group mt-4">Modelo: {{form.modelo}}</div>

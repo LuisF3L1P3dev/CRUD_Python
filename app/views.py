@@ -30,9 +30,18 @@ def view(request, pk):
 def edit(request, pk):
   context ={
     'db': Carro.objects.get(pk=pk),
-    'form': CarroForm(instance=context['db'])
   }
+  context['form'] = CarroForm(instance=context['db'])
   return render(request, 'form.html', context)
+  """ data = {}
+  data['db'] = Carro.objects.get(pk=pk)
+  data['form'] = CarroForm(instance=data['db'])
+  return render(request, 'form.html', data) """
 
 def update(request, pk):
-  return render(request='index.html')
+  context={}
+  context['db']= Carro.objects.get(pk=pk)
+  form = CarroForm(request.POST or None, instance=context['db'])
+  if form.is_valid():
+    form.save()
+    return render(request,'index.html')
