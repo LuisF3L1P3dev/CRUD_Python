@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-#from .models import Post
+from .models import Carro
 
-#admin.site.register(Post)py
+admin.site.register(Carro)

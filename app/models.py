@@ -7,7 +7,7 @@ class Carro(models.Model):
   marca = models.CharField(max_length=50)
   ano = models.IntegerField()
   placa = models.CharField(max_length=50)
-  imagem = models.ImageField()
+  imagem = models.ImageField(blank=True, upload_to='media/uploads')
 
   
   

@@ -3,6 +3,7 @@ from app.forms import CarroForm
 from app.models import Carro
 from django.core.paginator import Paginator
 from rest_framework import viewsets
+from PIL import Image
 
 from app.serialize import CarroSerialize
 
@@ -17,6 +18,7 @@ def home(request):
   data['db'] = paginator.get_page(pages)
   return render(request, 'index.html', data)
 
+  
 def form(request):
   context={
     'form': CarroForm() 
