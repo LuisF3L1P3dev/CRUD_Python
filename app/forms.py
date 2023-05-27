@@ -1,11 +1,12 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput
 from app.models import Carro
+
 
 # Create the form class.
 class CarroForm(ModelForm):
      class Meta:
          model = Carro
-         fields = ["modelo", "marca", "ano", "placa"]
+         fields = ["imagem","modelo", "marca", "ano", "placa"]
 
 
 # Creating a form to add an article.

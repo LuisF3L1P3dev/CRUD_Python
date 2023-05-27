@@ -1,12 +1,20 @@
 from django.shortcuts import render, redirect
 from app.forms import CarroForm
 from app.models import Carro
+from django.core.paginator import Paginator
+from rest_framework import viewsets
+
+from app.serialize import CarroSerialize
 
 # Create your views here.
 def home(request):
   data = {
-    'db': Carro.objects.all()  
+    #'db': Carro.objects.all(),
   }
+  all = Carro.objects.all()
+  paginator = Paginator(all, 2)
+  pages = request.GET.get('page')
+  data['db'] = paginator.get_page(pages)
   return render(request, 'index.html', data)
 
 def form(request):
@@ -44,4 +52,19 @@ def update(request, pk):
   form = CarroForm(request.POST or None, instance=context['db'])
   if form.is_valid():
     form.save()
-    return render(request,'index.html')
+    """  return render(request,'index.html') """
+    return redirect('home')
+
+def delete(request, pk):
+  db = Carro.objects.get(pk=pk)
+  db.delete()
+  return redirect('home')
+
+class CarroViewsSet(viewsets.ModelViewSet):
+  serializer_class = CarroSerialize
+  queryset = Carro.objects.all()
+  
+  def create(self, request, *args, **kwargs):
+    return super().create(request, *args, **kwargs)
+  
+
