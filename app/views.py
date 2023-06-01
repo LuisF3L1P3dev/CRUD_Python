@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from app.forms import CarroForm
-from app.models import Carro
+from app.forms import CarroForm, TesteForm
+from app.models import Carro, Teste
 from django.core.paginator import Paginator
 from rest_framework import viewsets
 from PIL import Image
@@ -13,17 +13,26 @@ def home(request):
     #'db': Carro.objects.all(),
   }
   all = Carro.objects.all()
-  paginator = Paginator(all, 2)
+  paginator = Paginator(all, 4)
   pages = request.GET.get('page')
   data['db'] = paginator.get_page(pages)
   return render(request, 'index.html', data)
 
+  """ https://acervolima.com/python-upload-de-imagens-em-django/ """
   
 def form(request):
   context={
     'form': CarroForm() 
   }
+  """ if request.method == 'POST': 
+    form = CarroForm(request.POST, request.FILES) 
+  if form.is_valid(): 
+    form.save() 
+    return redirect('success') 
+  else: 
+    form = CarroForm()  """
   return render(request, 'form.html', context)
+  
 
 def create(request):
   form = CarroForm(request.POST or None)
@@ -62,6 +71,17 @@ def delete(request, pk):
   db.delete()
   return redirect('home')
 
+def teste(request):
+  context = {
+    'form': TesteForm() 
+  }
+  form = TesteForm(request.POST or None)
+  if form.is_valid():
+    form.save()
+    return redirect('home')
+  
+  return render(request, 'teste.html', context)
+  
 class CarroViewsSet(viewsets.ModelViewSet):
   serializer_class = CarroSerialize
   queryset = Carro.objects.all()

@@ -14,7 +14,7 @@
     <h1>Cadastro</h1>
   </div>
 
-  {% if carro == 'Fiat Toro' %}
+  {% if carro.modelo.pk == "corola" %}
     Esse é um carro: {{carro}}
   {% else %}
     Não é um {{carro}}
@@ -30,19 +30,21 @@
 
     </div>
     
-    <form name="form" id="form" action="{% if db %}/update/{{db.id}}{% else %}/create/{% endif %}" method="post">
+    <form name="form" id="form" action="{% if db %}/update/{{db.id}}{% else %}/create/{% endif %}" method="post" enctype="multipart/form-data" >
       {% csrf_token %}
       <!-- {{form.as_p}} -->
-      <div class="form-group mt-4">Imagem:  {{form.imagem}}
+      <div class="form-group mt-4">Imagem: {{form.imagem}}
+      <!-- teria q ter um input file com o name="my_file" -->
       <!--{% if imagem.imagem %}
       <img src= "{{ imagem.imagem }}">
       {% endif %} -->
+       
       </div>
       <div class="form-group mt-4">Modelo: {{form.modelo}}</div>
       <div class="form-group mt-4">Marca: {{form.marca}}</div>
       <div class="form-group mt-4">Ano: {{form.ano}}</div>
       <div class="form-group mt-4">Placa: {{form.placa}}</div>
-      <input type="submit" class="btn btn-success" value="Salvar"  placeholder="" pattern="">
+      <input  type="submit" class="btn btn-success" value="Salvar"  placeholder="" pattern="">
     </form>
   </div>
     

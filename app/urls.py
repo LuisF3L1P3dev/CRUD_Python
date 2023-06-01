@@ -1,9 +1,9 @@
 from django.urls import include, path
 from rest_framework .routers import DefaultRouter
 from projectCar import settings
-from .views import CarroViewsSet, home, form, create, view, edit, update, delete
+from .views import CarroViewsSet, home, form, create, view, edit, update, delete, teste
 from django.conf.urls.static import static
-
+from django.conf import settings
 
 
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('edit/<int:pk>/', edit, name='edit'),
     path('update/<int:pk>', update, name='update'),
     path('delete/<int:pk>', delete, name='delete'),
+    path('teste/', teste , name='teste'),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
