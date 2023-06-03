@@ -24,18 +24,20 @@ def form(request):
   context={
     'form': CarroForm() 
   }
+  print(request.FILES)
   """ if request.method == 'POST': 
     form = CarroForm(request.POST, request.FILES) 
   if form.is_valid(): 
     form.save() 
-    return redirect('success') 
+    return redirect('home') 
   else: 
-    form = CarroForm()  """
+    form = CarroForm() """
+  
   return render(request, 'form.html', context)
   
 
 def create(request):
-  form = CarroForm(request.POST or None)
+  form = CarroForm(request.POST or None, request.FILES or None)#por se usar classe base view é tem que colocar o metodo Files para as imagens serem baixadas em media
   if form.is_valid():
     form.save()
     return redirect('home')
