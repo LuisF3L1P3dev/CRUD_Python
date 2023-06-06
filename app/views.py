@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views import View
 from app.forms import CarroForm, TesteForm
 from app.models import Carro, Teste
 from django.core.paginator import Paginator
@@ -10,16 +11,30 @@ from app.serialize import CarroSerialize
 # Create your views here.
 def home(request):
   data = {
-    #'db': Carro.objects.all(),
+    #'db': Carro.objects.all()
+
   }
+  #busca
+  #ainda não esá funcionando pois esta dando conflito com a paginação
+  search = request.GET.get('search')
+  if search:
+    data['db'] = Carro.objects.filter(modelo__icontains=search)
+  else:
+    data['db'] = Carro.objects.all()
+  """ get context data """
+  
+
+  #paginação
   all = Carro.objects.all()
-  paginator = Paginator(all, 4)
+  paginator = Paginator(all, 4)#numero de objetos na pagina
   pages = request.GET.get('page')
   data['db'] = paginator.get_page(pages)
   return render(request, 'index.html', data)
 
+
+  """ estou tentando trocar paginator para a chave pg para não entrar em conflito com a chave db do dicionario data """
   """ https://acervolima.com/python-upload-de-imagens-em-django/ """
-  
+
 def form(request):
   context={
     'form': CarroForm() 
@@ -62,7 +77,7 @@ def edit(request, pk):
 def update(request, pk):
   context={}
   context['db']= Carro.objects.get(pk=pk)
-  form = CarroForm(request.POST or None, instance=context['db'])
+  form = CarroForm(request.POST or None, request.FILES or None, instance=context['db'])
   if form.is_valid():
     form.save()
     """  return render(request,'index.html') """

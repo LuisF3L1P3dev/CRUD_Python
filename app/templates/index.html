@@ -24,6 +24,14 @@
   </div>
 
   <div class="col-8 m-auto pt-2 pb-2 text-center">
+    <form action="?" method="get" class="d-flex">
+      <input type="text" id="search" name="search" class=" p-2 form-control text-center flex-grow-1" placeholder="Buscar" value="{{ request.GET.search }}" autocomplete="off"><!-- outocomplete -->
+      <input type="submit" class="p-2 m-2 btn btn-success" value="Buscar">
+      <a href="{% url 'home' %}" class="p-2 m-2 btn btn-secondary">Limpar</a>
+    </form>
+  </div>
+
+  <div class="col-8 m-auto pt-2 pb-2 text-center">
     <table class="table">
       <thead class="table-dark">
         <tr>
@@ -40,8 +48,11 @@
       {% for dbs in db %}
         <tr>
           <th>{{dbs.id}}</th>
-          <td>{{dbs.imagem}}</td>
-          <!-- <img src="{{ carro.imagem.url }}" alt=""> -->
+          <td>{{dbs.imagem}}
+            {% if dbs.imagem %}
+              <img src="{{ dbs.imagem.url }}" alt="" width="100">
+            {% endif %}
+          </td>
           <td>{{dbs.modelo}}</td>
           <td>{{dbs.marca}}</td>
           <td>{{dbs.ano}}</td>
@@ -55,7 +66,7 @@
       </tbody>
     </table>
   </div>
-    
+
   <div class="pagination">  
 
     <div class="pagination_previous">
@@ -63,7 +74,7 @@
         <a href="?page={{db.previous_page_number}}"> < </a>
       {% endif %}
     </div>
-
+    
     <div class="pagination_current">
       {{ db.number }} <!-- pega página atual -->
     </div>
