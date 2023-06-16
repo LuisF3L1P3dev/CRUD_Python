@@ -4,3 +4,6 @@ from django.views.generic import TemplateView
 
 class TesteView(TemplateView):
       template_name = "paginas/teste.html"
+
+class SobreView(TemplateView):
+      template_name = "paginas/sobre.html"

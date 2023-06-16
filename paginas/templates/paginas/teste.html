@@ -1,29 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block 'bootstrap' %}
-
-{% endblock %}
-{% block 'css' %}
-    <link rel="stylesheet" href="{% static './css/estilo.css' %}">
-{% endblock %}
-
 {% block 'title' %}
 Teste
 {% endblock %}
 
 {% block 'conteudo' %}
-
-  <img src="{% static './img/mobi.webp' %}" width="200" alt="" >
-    <h1>TESTE</h1>
-    <form method="POST" enctype="multipart/form-data" enctype="multipart/form-data">
-      {% csrf_token %}
-      <!-- campos do formulário -->
-      <input type="file" name="picture"><!-- multiple add varias imagens -->
-      <button type="submit">Salvar</button>
-    <h2>Teste das paginas</h2>
-    </form>
+<img src="{% static './img/mobi.webp' %}" width="200" alt="" >
+<!-- a imagem  sobrescreve o conteudo-->
 {% endblock %}
+
 
 
   
