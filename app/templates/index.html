@@ -20,15 +20,15 @@
   {% endif %}
 
   <div class="col-8 m-auto pt-2 pb-2 text-center">
-    <a href="form/" class="btn btn-success">Adicionar</a>
-  </div>
-
-  <div class="col-8 m-auto pt-2 pb-2 text-center">
     <form action="?" method="get" class="d-flex">
       <input type="text" id="search" name="search" class=" p-2 form-control text-center flex-grow-1" placeholder="Buscar" value="{{ request.GET.search }}" autocomplete="off"><!-- outocomplete -->
       <input type="submit" class="p-2 m-2 btn btn-success" value="Buscar">
       <a href="{% url 'home' %}" class="p-2 m-2 btn btn-secondary">Limpar</a>
     </form>
+  </div>
+
+  <div class="col-8 m-auto pt-0 pb-0 text-left">
+    <a href="form/" class="btn btn-success">Adicionar</a>
   </div>
 
   <div class="col-8 m-auto pt-2 pb-2 text-center">
@@ -48,9 +48,12 @@
       {% for dbs in db %}
         <tr>
           <th>{{dbs.id}}</th>
-          <td>{{dbs.imagem}}
+          <td>
+            <!-- {{dbs.imagem}} -->
             {% if dbs.imagem %}
-              <img src="{{ dbs.imagem.url }}" alt="" width="100">
+              <a href="/view/{{dbs.id}}">
+                <img src="{{ dbs.imagem.url }}" alt="" width="100">
+              </a>
             {% endif %}
           </td>
           <td>{{dbs.modelo}}</td>
