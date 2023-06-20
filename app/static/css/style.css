@@ -15,9 +15,15 @@ body {
   background-color: white;
 }
 
+.container {
+  background-color: bisque;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

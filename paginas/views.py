@@ -7,3 +7,7 @@ class TesteView(TemplateView):
 
 class SobreView(TemplateView):
       template_name = "paginas/sobre.html"
+
+class PrincipalView(TemplateView):
+      template_name = "paginas/principal.html"
+
