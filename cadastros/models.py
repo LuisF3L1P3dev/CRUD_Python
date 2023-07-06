@@ -5,7 +5,7 @@ from django.db import models
 #if carro = vai ter MarcaCarros else moto = MarcaMoto
 class Marca(models.Model):
    nome = models.CharField(max_length=50)
-   logo = models.ImageField(blank=True, upload_to='img_marcas')
+   logo = models.ImageField(blank=True, upload_to='img_marcas')   
    #um veciculo vai ter uma marca, uma marca vai ter varios veiculos 
 
 class Veiculo(models.Model):
